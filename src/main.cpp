@@ -165,9 +165,13 @@ int main() {
 
     // load models
     // -----------
-    Model ourModel("resources/objects/backpack/backpack.obj");
-    ourModel.SetShaderTextureNamePrefix("material.");
+    Model rose("resources/objects/redrose/redrose.obj");
+    rose.SetShaderTextureNamePrefix("material.");
 
+    Model moon("resources/objects/moon/moon.obj");
+    moon.SetShaderTextureNamePrefix("material.");
+    
+    
     PointLight& pointLight = programState->pointLight;
     pointLight.position = glm::vec3(4.0f, 4.0, 0.0);
     pointLight.ambient = glm::vec3(0.1, 0.1, 0.1);
@@ -222,12 +226,20 @@ int main() {
         ourShader.setMat4("view", view);
 
         // render the loaded model
+        float time = glfwGetTime();
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model,
-                               programState->backpackPosition); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(programState->backpackScale));    // it's a bit too big for our scene, so scale it down
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::rotate(model, time, glm::vec3 (0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
-        ourModel.Draw(ourShader);
+        rose.Draw(ourShader);
+
+        glm::mat4 model1 = glm::mat4(1.0f);
+        model1 = glm::translate(model1, glm::vec3(0.0f, -1.5f, 0.0f)); // translate it down so it's at the center of the scene
+        model1 = glm::rotate(model1, time, glm::vec3 (0.0f, 1.0f, 0.0f));
+        model1 = glm::scale(model1, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        ourShader.setMat4("model", model1);
+        moon.Draw(ourShader);
 
         if (programState->ImGuiEnabled)
             DrawImGui(programState);
