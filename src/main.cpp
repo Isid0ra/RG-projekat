@@ -52,7 +52,7 @@ float lastFrame = 0.0f;
 bool blinn = true;
 bool hdr = false;
 bool bloom = false;
-//bool spotLightOn = false;
+bool spotLightOn = true;
 float exposure = 1.0f;
 
 glm::vec3 lightPos(-1.5f, 2.5f, 2.0f);
@@ -272,6 +272,9 @@ int main() {
     glBindVertexArray(0);
 
 
+    /* hdr i bloom prolaze kompilaciju ali se ne prikazuju pa su zakomentarisani
+
+
     // configure (floating point) framebuffers
     // ---------------------------------------
     unsigned int hdrFBO;
@@ -325,6 +328,7 @@ int main() {
             std::cout << "Framebuffer not complete!" << std::endl;
     }
 
+*/
 
 // load textures
     // -------------
@@ -482,7 +486,7 @@ int main() {
         glBindVertexArray(0);
         glDepthFunc(GL_LESS); // set depth function back to default
 
-
+/*
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -515,7 +519,7 @@ int main() {
         hdrShader.setFloat("exposure", exposure);
         renderQuad();
 
-
+*/
 
         if (programState->ImGuiEnabled)
             DrawImGui(programState);
@@ -761,11 +765,7 @@ void setLights(Shader shaderName){
     //if(spotLightOn){
         shaderName.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
         shaderName.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
-    //}
-    //else{
-    //    shaderName.setVec3("spotLight.diffuse", 0.0f, 0.0f, 0.0f);
-    //    shaderName.setVec3("spotLight.specular", 0.0f, 0.0f, 0.0f);
-    //}
+
 
     shaderName.setFloat("spotLight.constant", 1.0f);
     shaderName.setFloat("spotLight.linear", 0.09f);
