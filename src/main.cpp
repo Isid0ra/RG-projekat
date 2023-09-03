@@ -762,7 +762,7 @@ void setLights(Shader shaderName){
     shaderName.setVec3("spotLight.position", programState->camera.Position);
     shaderName.setVec3("spotLight.direction", programState->camera.Front);
     shaderName.setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
-    //if(spotLightOn){
+
         shaderName.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
         shaderName.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
 
